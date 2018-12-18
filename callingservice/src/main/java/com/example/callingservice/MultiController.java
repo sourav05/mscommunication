@@ -9,18 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-public class MainController {
-
-	/*@Autowired
-	private DiscoveryClient discoveryClient;*/
+public class MultiController {
 	
 	@Autowired
 	private RestTemplate template;
 	
-	@GetMapping("add/{num1}/{num2}")
-	public String add(@PathVariable(value="num1") int number1, @PathVariable(value="num2") int number2){
-//		RestTemplate template = new RestTemplate();
-		ResponseEntity<String> response = template.getForEntity("http://add-service/add/" + number1 + "/" + number2, String.class);
+	@GetMapping("mult/{num1}/{num2}")
+	public String multiply(@PathVariable(value="num1") int number1, @PathVariable(value="num2") int number2){
+		ResponseEntity<String> response = template.getForEntity("http://multi-service" + "/mult/" + number1 + "/" + number2, String.class);
 		return response.getBody();
 	}
 }
